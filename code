@@ -1,0 +1,36 @@
+import random
+word_list = ["camel", "dog", "cat", "elephant", "horse", "cow","buffalow","donkey", "wolf","fox", "lion","tiger","deer"]
+lives=5
+chosen_word=random.choice(word_list)
+print("Welcome to the Game\nGuess the name of animal")
+length=len(chosen_word)
+placeholder=""
+for position in range(length):
+    placeholder += "_"
+print(placeholder)
+
+game_over=False
+correct_letter=[]
+while not game_over:
+    display=""
+    guess_letter = input("Guess a letter: ").lower()
+
+    for letter in chosen_word:
+        if guess_letter == letter :
+            display += guess_letter
+            correct_letter.append(letter)
+        elif letter in correct_letter:
+            display += letter
+        else:
+            display += "_"
+
+    print(display)
+    if guess_letter  not in chosen_word:
+        lives -= 1
+        print(f"{guess_letter} is a wrong guess\nYou have remaining {lives} lives")
+        if lives == 0:
+            game_over = True
+            print("You Lose")
+    if "_" not in display:
+        game_over = True
+        print("You Win")
